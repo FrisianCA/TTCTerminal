@@ -27,15 +27,13 @@ def get_routes_available_full(station):
 def get_route_options_pretty(route_list):
     route_name = route_list[0]
     station_name = route_list[1]
-    route_options = get_route_options_from_route_station(route_name, station_name)
-    for i, ro in enumerate(route_options):
-        print(f"Route {ro.name[0:3]},Option #{i} | Name: {ro.name.capitalize()} | Next Departure: {ro.departure_time.capitalize()}")
+    departures_list = get_route_options_from_route_station(route_name, station_name)
+    for i, d in enumerate(departures_list):
+        print(f"Route {d.name[0:3]},Option #{i} | Name: {d.name.capitalize()} | Next Departure: {d.departure_time.capitalize()}")
 
 
 def get_route_options_from_route_station(route_name, station):
     route_name = route_name.replace("_", " ")
-    print(route_name)
-    print(station)
     departures_list = []
     json_resp = requests.get(f'http://myttc.ca/{station}.json').json()
     data = json.dumps(json_resp)
@@ -45,7 +43,9 @@ def get_route_options_from_route_station(route_name, station):
                 for departures in s['stop_times']:
                     r = Route(departures['shape'], departures['departure_time'])
                     departures_list.append(r)
-            return departures_list
+                return departures_list
+
+    return []
 
 
 def get_routes_near(street_a, street_b):
