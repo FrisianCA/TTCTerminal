@@ -2,14 +2,12 @@
 
 Python application to query TTC Station routes, and query route information for TTC subway and bus routes. 
 
-I created this simple program, so I could easily get information for my bus route home from the command line.
-
 ## Installation
 
 Clone the repository
 
 ```bash
-git clone https://github.com/GarrettHofland/TTCTerminal.git
+git clone https://github.com/FrisianCA/TTCTerminal.git
 
 chmod +x ttcterminal.py
 ```
